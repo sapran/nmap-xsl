@@ -11,12 +11,16 @@ then
 
 ## Templates
 
-nmap-http-services.xsl - extract hosts with open HTTP services
+http-services.xsl - extract hosts with open HTTP services
 
-nmap-open-ports.xsl - extract all open ports
+open-ports.xsl - extract all open ports
 
-nmap-os-version.xsl - extract hosts and OS versions
+services.xsl - extract all TCP and UDP services
 
-nmap-vulnerable-hosts.xsl - extract hosts vulnerable according to NSE checks
+os-types.xsl - extract OS types
 
-nmap-windows-xp.xsl - extract Windows XP hosts
+os-versions.xsl - extract hosts and OS versions
+
+vulnerabilities.xsl - extract hosts vulnerable according to NSE checks
+
+windows-xp.xsl - extract Windows XP hosts
