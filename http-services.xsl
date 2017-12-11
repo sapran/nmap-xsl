@@ -4,24 +4,16 @@
 <xsl:template match="/nmaprun">
     <xsl:for-each select="host">
         <xsl:for-each select="ports/port">
-        	<xsl:if test="state/@state = 'open' and service/@name = 'http'">
+			<xsl:if test="state/@state = 'open' and (service/@name = 'http' or service/@name = 'https')">
         		<xsl:if test="../../hostnames/hostname[@type='user']">
-	        		<xsl:if test="@portid = '80'">
-	        			<xsl:text>http://</xsl:text>
-	        			<xsl:value-of select="../../hostnames/hostname[@type='user']/@name"/>
-	        			<xsl:text>&#xa;</xsl:text>
+        			<xsl:value-of select="service/@name"/>
+        			<xsl:text>://</xsl:text>
+        			<xsl:value-of select="../../hostnames/hostname[@type='user']/@name"/>
+        			<xsl:if test="@portid != '80' and @portid != '443'">
+	        			<xsl:text>:</xsl:text>
+	        			<xsl:value-of select="@portid"/>
 	        		</xsl:if>
-	        		<xsl:if test="@portid = '443'">
-	        			<xsl:text>https://</xsl:text>
-	        			<xsl:value-of select="../../hostnames/hostname[@type='user']/@name"/>
-	        			<xsl:text>&#xa;</xsl:text>
-	        		</xsl:if>
-	        		<xsl:if test="@portid != '80' and @portid != '443'">
-	        			<xsl:text>http://</xsl:text>
-	        			<xsl:value-of select="../../hostnames/hostname[@type='user']/@name"/>
-	        			<xsl:value-of select="portid"/>
-	        			<xsl:text>&#xa;</xsl:text>
-	        		</xsl:if>
+        			<xsl:text>&#xa;</xsl:text>
 	        	</xsl:if>
         	</xsl:if>
     	</xsl:for-each>
