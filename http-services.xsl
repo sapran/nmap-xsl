@@ -6,8 +6,11 @@
         <xsl:for-each select="ports/port">
 			<xsl:if test="state/@state = 'open' and (service/@name = 'http' or service/@name = 'https')">
         		<xsl:if test="../../hostnames/hostname[@type='user']">
-        			<xsl:value-of select="service/@name"/>
-        			<xsl:text>://</xsl:text>
+                    <xsl:text>http</xsl:text>
+                    <xsl:if test="service/@name = 'https' or (service/@name = 'http' and service/@tunnel = 'ssl')">
+                        <xsl:text>s</xsl:text>
+        			</xsl:if>
+                    <xsl:text>://</xsl:text>
         			<xsl:value-of select="../../hostnames/hostname[@type='user']/@name"/>
         			<xsl:if test="@portid != '80' and @portid != '443'">
 	        			<xsl:text>:</xsl:text>
